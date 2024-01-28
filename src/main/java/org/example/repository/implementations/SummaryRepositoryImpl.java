@@ -1,7 +1,6 @@
 package org.example.repository.implementations;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.kafka.common.protocol.types.Field;
 import org.example.config.schema.RedisSchema;
 import org.example.model.Data;
 import org.example.model.Summary;
@@ -9,13 +8,11 @@ import org.example.model.entry.SummaryEntry;
 import org.example.model.enums.MeasurementType;
 import org.example.model.enums.SummaryType;
 import org.example.repository.SummaryRepository;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 
-import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 

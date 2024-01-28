@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.example.model.enums.SummaryType;
+import org.example.model.SummaryType;
 
 @NoArgsConstructor
 @Getter

@@ -1,7 +1,6 @@
 package org.example.model;
 
 import lombok.*;
-import org.example.model.enums.MeasurementType;
 
 import java.time.LocalDateTime;
 

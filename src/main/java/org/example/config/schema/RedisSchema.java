@@ -1,7 +1,7 @@
 package org.example.config.schema;
 
 import org.example.config.helper.KeyHelper;
-import org.example.model.enums.MeasurementType;
+import org.example.model.MeasurementType;
 
 public class RedisSchema {
     //set

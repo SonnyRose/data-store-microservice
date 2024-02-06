@@ -5,7 +5,7 @@ import com.google.gson.JsonParser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.model.Data;
-import org.example.model.MeasurementType;
+import org.example.model.types.MeasurementType;
 import org.example.service.interfaces.CDCEventConsumer;
 import org.example.service.interfaces.SummaryService;
 import org.springframework.kafka.annotation.KafkaListener;

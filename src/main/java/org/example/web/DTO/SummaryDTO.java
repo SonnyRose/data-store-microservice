@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.example.model.entry.SummaryEntry;
-import org.example.model.MeasurementType;
+import org.example.model.types.MeasurementType;
 
 import java.util.List;
 import java.util.Map;

@@ -2,8 +2,8 @@ package org.example.web.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.model.Summary;
-import org.example.model.MeasurementType;
-import org.example.model.SummaryType;
+import org.example.model.types.MeasurementType;
+import org.example.model.types.SummaryType;
 import org.example.service.interfaces.SummaryService;
 import org.example.web.DTO.SummaryDTO;
 import org.example.web.mapper.SummaryMapper;

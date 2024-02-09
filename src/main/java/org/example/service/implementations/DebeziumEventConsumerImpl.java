@@ -38,7 +38,7 @@ public class DebeziumEventConsumerImpl implements CDCEventConsumer {
             log.error("Exception occurred during data handling", exception);
         }
     }
-    private Data createDataFromPayload(JsonObject payload){
+    public Data createDataFromPayload(JsonObject payload){
         Data data = new Data();
         data.setId(payload.get(ID_KEY).getAsLong());
         data.setSensorId(payload.get(SENSOR_ID_KEY).getAsLong());
@@ -47,7 +47,7 @@ public class DebeziumEventConsumerImpl implements CDCEventConsumer {
         data.setMeasurementType(MeasurementType.valueOf(payload.get(MEASUREMENT_TYPE_KEY).getAsString()));
         return data;
     }
-    private JsonObject parseJson(String json){
+    public JsonObject parseJson(String json){
         return JsonParser.parseString(json).getAsJsonObject().get("payload").getAsJsonObject();
     }
     private LocalDateTime convertEpochMillisToDateTime(long epochMillis){

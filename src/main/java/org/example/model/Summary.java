@@ -24,6 +24,9 @@ public class Summary {
         this.values = new HashMap<>();
     }
     public void addValues(MeasurementType type, SummaryEntry value){
+        if (type == null || value == null){
+            return;
+        }
         if (values.containsKey(type)){
             List<SummaryEntry> entries = new ArrayList<>(values.get(type));
             entries.add(value);

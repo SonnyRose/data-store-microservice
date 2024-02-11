@@ -9,6 +9,7 @@ import org.example.web.DTO.SummaryDTO;
 import org.example.web.mapper.SummaryMapper;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.EnumSet;
 import java.util.Set;
 
 @RestController
@@ -25,6 +26,9 @@ public class AnalyticsController {
                                   @RequestParam(value = "st", required = false)
                                       Set<SummaryType> summaryTypes
     ) {
+        if (measurementTypes == null || measurementTypes.isEmpty()) {
+            measurementTypes = EnumSet.allOf(MeasurementType.class);
+        }
         Summary summary = summaryService.get(sensorId,
                 measurementTypes,
                 summaryTypes);

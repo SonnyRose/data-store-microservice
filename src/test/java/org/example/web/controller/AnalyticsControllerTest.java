@@ -12,7 +12,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.lang.reflect.Method;
 import java.util.Collections;
@@ -20,8 +24,8 @@ import java.util.EnumSet;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class AnalyticsControllerTest {
     @InjectMocks
@@ -30,9 +34,12 @@ public class AnalyticsControllerTest {
     private SummaryService summaryService;
     @Mock
     private SummaryMapper summaryMapper;
+    @Mock
+    private MockMvc mockMvc;
     @BeforeEach
     public void setup(){
         MockitoAnnotations.openMocks(this);
+        this.mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
     @Test
     public void testGetSummary_validInput_returnsSummaryDTO() throws Exception {
@@ -91,6 +98,47 @@ public class AnalyticsControllerTest {
         invokePrivateGetSummary(sensorId, measurementTypes, summaryTypes);
 
         verify(summaryService).get(sensorId, measurementTypes, summaryTypes);
+    }
+    @Test
+    public void testGetSummary() throws Exception {
+        long sensorId = 1L;
+        Set<MeasurementType> measurementTypes = EnumSet.of(MeasurementType.TEMPERATURE);
+        Set<SummaryType> summaryTypes = EnumSet.of(SummaryType.AVERAGE);
+
+        Summary summary = new Summary();
+
+        when(summaryService.get(sensorId, measurementTypes, summaryTypes)).thenReturn(summary);
+
+        SummaryDTO summaryDTO = new SummaryDTO();
+        when(summaryMapper.toDTO(summary)).thenReturn(summaryDTO);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/api/v1/analytics/summary/{sensorId}", sensorId)
+                        .param("mt", MeasurementType.TEMPERATURE.name())
+                        .param("st", SummaryType.AVERAGE.name())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        verify(summaryService, times(1)).get(sensorId, measurementTypes, summaryTypes);
+        verify(summaryMapper, times(1)).toDTO(summary);
+    }
+    @Test
+    public void testGetSummaryWithDefaults() throws Exception {
+        long sensorId = 1L;
+        Summary summary = new Summary();
+
+        when(summaryService.get(eq(sensorId), any(), any())).thenReturn(summary);
+
+        SummaryDTO summaryDTO = new SummaryDTO();
+        when(summaryMapper.toDTO(summary)).thenReturn(summaryDTO);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/api/v1/analytics/summary/{sensorId}", sensorId)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        verify(summaryService, times(1)).get(eq(sensorId), any(), any());
+        verify(summaryMapper, times(1)).toDTO(summary);
     }
     private void invokePrivateGetSummary(long sensorId,
                                          Set<MeasurementType> measurementTypes,

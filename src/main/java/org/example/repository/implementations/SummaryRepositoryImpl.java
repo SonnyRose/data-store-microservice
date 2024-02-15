@@ -38,7 +38,6 @@ public class SummaryRepositoryImpl implements SummaryRepository  {
             return getSummary(sensorId, effectiveMeasurementTypes, effectiveSummaryTypes, jedis);
         }
     }
-
     @Override
     public void handle(Data data) {
         try (Jedis jedis = jedisPool.getResource()){

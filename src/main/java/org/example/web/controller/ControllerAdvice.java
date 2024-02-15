@@ -15,5 +15,4 @@ public class ControllerAdvice {
         e.printStackTrace();
         return "Things happens";
     }
-
 }

@@ -16,7 +16,6 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class SummaryServiceImpl implements SummaryService {
     private final SummaryRepository summaryRepository;
-
     @Override
     public Summary get(long sensorId,
                        Set<MeasurementType> measurementTypes,
@@ -28,10 +27,8 @@ public class SummaryServiceImpl implements SummaryService {
                         summaryTypes == null ? Set.of(SummaryType.values()) : summaryTypes)
                 .orElseThrow(SensorNotFoundException::new);
     }
-
     @Override
     public void handle(Data data) {
         summaryRepository.handle(data);
     }
-
 }

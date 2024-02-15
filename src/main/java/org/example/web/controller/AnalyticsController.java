@@ -18,7 +18,6 @@ import java.util.Set;
 public class AnalyticsController {
     private final SummaryService summaryService;
     private final SummaryMapper summaryMapper;
-
     @GetMapping("/summary/{sensorId}")
     private SummaryDTO getSummary(@PathVariable long sensorId,
                                   @RequestParam(value = "mt", required = false)

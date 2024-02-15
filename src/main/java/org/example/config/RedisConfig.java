@@ -12,26 +12,20 @@ import redis.clients.jedis.JedisPoolConfig;
 @Getter
 @Setter
 public class RedisConfig {
-
     @Value("${REDIS_HOST}")
     private String host;
-
     @Value("${REDIS_PORT}")
     private int port;
-
     @Bean
     public JedisPool jedisPool() {
         if (host == null || port <= 0) {
             throw new IllegalArgumentException("Invalid host or port");
         }
-
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setJmxEnabled(false);
-
         try {
             return new JedisPool(jedisPoolConfig, host, port);
         } catch (Exception e) {
-            // Log the exception or handle it as appropriate
             throw new RuntimeException("Failed to create JedisPool", e);
         }
     }

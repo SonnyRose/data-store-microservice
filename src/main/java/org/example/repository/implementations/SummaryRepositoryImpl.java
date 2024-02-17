@@ -7,7 +7,7 @@ import org.example.model.Summary;
 import org.example.model.entry.SummaryEntry;
 import org.example.model.types.MeasurementType;
 import org.example.model.types.SummaryType;
-import org.example.repository.SummaryRepository;
+import org.example.repository.interfaces.SummaryRepository;
 import org.springframework.stereotype.Repository;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;

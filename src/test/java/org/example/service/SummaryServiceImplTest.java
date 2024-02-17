@@ -5,7 +5,7 @@ import org.example.model.Summary;
 import org.example.model.exception.SensorNotFoundException;
 import org.example.model.types.MeasurementType;
 import org.example.model.types.SummaryType;
-import org.example.repository.SummaryRepository;
+import org.example.repository.interfaces.SummaryRepository;
 import org.example.service.implementations.SummaryServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

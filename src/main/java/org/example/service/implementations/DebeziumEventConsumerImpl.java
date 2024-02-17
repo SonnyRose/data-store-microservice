@@ -26,7 +26,6 @@ public class DebeziumEventConsumerImpl implements CDCEventConsumer {
     private final static String MEASUREMENT_KEY = "measurement";
     private final static String TIMESTAMP_KEY = "timeStamp";
     private final static String MEASUREMENT_TYPE_KEY = "type";
-
     @Override
     @KafkaListener(topics = "data")
     public void handle(String message) {

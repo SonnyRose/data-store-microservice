@@ -17,5 +17,4 @@ public class RedisSchema {
     ){
         return KeyHelper.getKey("sensors:" + sensorId + ":" + measurementType.name().toLowerCase());
     }
-
 }

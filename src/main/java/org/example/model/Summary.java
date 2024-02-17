@@ -18,8 +18,6 @@ import java.util.Map;
 public class Summary {
     private long sensorId;
     private Map<MeasurementType, List<SummaryEntry>> values;
-
-
     public Summary(){
         this.values = new HashMap<>();
     }

@@ -12,7 +12,6 @@ public class KeyHelper {
     private final static String defaultPrefix = "app";
     @Setter
     private static String prefix = null;
-
     public static String getKey(String key){
         return getPrefix() + ":" + key;
     }

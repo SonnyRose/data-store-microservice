@@ -49,9 +49,7 @@ public class SummaryRepositoryImpl implements SummaryRepository  {
             updateMaxValue(data, jedis);
             updateSumAndAverageValue(data, jedis);
         }
-        // метод, який зберігає та оновлює дані в Redis для обчислення статистик датчика
     }
-
     private Optional<Summary> getSummary(long sensorId,
                                          Set<MeasurementType> measurementTypes,
                                          Set<SummaryType> summaryTypes, Jedis jedis){
@@ -82,16 +80,10 @@ public class SummaryRepositoryImpl implements SummaryRepository  {
     }
     private void updateMinValue(Data data, Jedis jedis){
         String key = RedisSchema.summaryKey(data.getSensorId(), data.getMeasurementType());
-        // створення ключа Redis для зберігання статистики для конкретного датчика та типу вимірювання
         String value = jedis.hget(key, SummaryType.MIN.name().toLowerCase());
-        // отримання поточного мінімального значення з Redis за допомогою hget.
-        // Мінімальне значення зберігається для кожного типу вимірювання окремо
         if (value == null || data.getMeasurement() < Double.parseDouble(value)){
-            // Порівнюється поточне значення із новим значенням, яке прийшло з датчика data.getMeasurement()
-            // Якщо поточне значення відсутнє або нове значення менше, тоді виконується Redis
             jedis.hset(key, SummaryType.MIN.name().toLowerCase(),
                     String.valueOf(data.getMeasurement()));
-            // Оновлення значення за необхідності:
         }
     }
     private void updateMaxValue(Data data, Jedis jedis){

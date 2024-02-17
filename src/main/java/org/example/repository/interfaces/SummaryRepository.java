@@ -12,7 +12,6 @@ import java.util.Set;
 
 @Repository
 public interface SummaryRepository  {
-
     Optional<Summary> findBySensorId(
             long sensorId,
             Set<MeasurementType> measurementTypes,

@@ -15,17 +15,14 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.TimeZone;
 
+import static org.example.constants.MessageConstants.*;
+
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class DebeziumEventConsumerImpl implements CDCEventConsumer {
     private final SummaryService summaryService;
-    private final static String ID_KEY = "id";
-    private final static String SENSOR_ID_KEY = "sensor_id";
-    private final static String MEASUREMENT_KEY = "measurement";
-    private final static String TIMESTAMP_KEY = "timeStamp";
-    private final static String MEASUREMENT_TYPE_KEY = "type";
     @Override
     @KafkaListener(topics = "data")
     public void handle(String message) {

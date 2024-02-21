@@ -7,10 +7,7 @@ import org.example.model.entry.SummaryEntry;
 import org.example.model.types.MeasurementType;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Getter
 @Setter
@@ -22,9 +19,8 @@ public class Summary {
         this.values = new HashMap<>();
     }
     public void addValues(MeasurementType type, SummaryEntry value){
-        if (type == null || value == null){
-            return;
-        }
+        Objects.requireNonNull(type, "Measurement type cannot be null");
+        Objects.requireNonNull(value, "Summary entry cannot be null");
         if (values.containsKey(type)){
             List<SummaryEntry> entries = new ArrayList<>(values.get(type));
             entries.add(value);
